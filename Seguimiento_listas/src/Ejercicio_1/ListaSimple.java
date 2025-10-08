@@ -31,6 +31,7 @@ public class ListaSimple<E> {
         System.out.println(mensaje);
     }
 
+    //metodo ejercicio 1
     public void mostrarPosicionImpar(){
         NodoSimple<E> actual=primero;
         String mensaje="{ ";
@@ -47,6 +48,7 @@ public class ListaSimple<E> {
 
 
     }
+
 
 
 }
