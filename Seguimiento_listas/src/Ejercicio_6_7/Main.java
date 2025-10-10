@@ -10,5 +10,11 @@ public class Main {
         lista.agregarPrimero(5);
 
         lista.imprimirHaciaAtras();
+
+        //implementacion  ejercicio 7
+        for(Integer dato:lista){
+            System.out.println(dato);
+        }
+
     }
 }

@@ -2,7 +2,10 @@ package Ejercicio_6_7;
 
 import Ejercicio_5.NodoGenerico;
 
-public class ListaDoble<E> {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class ListaDoble<E> implements Iterable<E> {
     private NodoDoble<E> primero;
     private NodoDoble<E> ultimo;
     private int tam;
@@ -14,30 +17,50 @@ public class ListaDoble<E> {
     }
     public void agregarPrimero(E dato){
         NodoDoble<E> nuevo = new NodoDoble<>(dato);
-        if(primero == null){
+        if (primero == null) {
             primero = nuevo;
-            ultimo=nuevo;
-            nuevo.setProximo(nuevo);
-            nuevo.setAnterior(nuevo);
-
-        }else{
+            ultimo = nuevo;
+        } else {
             nuevo.setProximo(primero);
-            nuevo.setAnterior(ultimo);
             primero.setAnterior(nuevo);
-            ultimo.setProximo(nuevo);
-            primero=nuevo;
+            primero = nuevo;
         }
         this.tam++;
+
     }
 
     //metodo ejercicio 6
     public void imprimirHaciaAtras(){
-        NodoDoble<E> actual=ultimo;
-        do {
+        NodoDoble<E> actual = ultimo;
+        while (actual != null) {
             System.out.print(actual.getDato() + " ");
             actual = actual.getAnterior();
-        }while(actual!=ultimo);
+        }
         System.out.println();
+
+    }
+
+    //metodo ejercicio 7
+    @Override
+    public Iterator<E> iterator(){
+        return new Iterator<E>() {
+            private NodoDoble<E> actual=primero;
+
+            @Override
+            public boolean hasNext(){
+                return actual!=null;
+            }
+            @Override
+            public E next(){
+                if (actual == null) {
+                    throw new NoSuchElementException();
+                }
+                E dato=actual.getDato();
+                actual=actual.getProximo();
+                return dato;
+            }
+        };
+
     }
 
 }
